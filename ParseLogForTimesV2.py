@@ -98,18 +98,18 @@ def load_engine(raw_logs_location, logs_results_location):
     global std_deviation
     global cnt_samples
 
-    max_seconds = df2['Elapsed Time'].max()
-    min_seconds = df2['Elapsed Time'].min()
-    sum_elapsed = df2['Elapsed Time'].sum()
-    mean_seconds = df2['Elapsed Time'].mean()
-    std_deviation = df2['Elapsed Time'].std()
-    cnt_samples = df2['Elapsed Time'].count()
+    max_seconds = float("{0:.2f}".format(df2['Elapsed Time'].max()))
+    min_seconds = float("{0:.2f}".format(df2['Elapsed Time'].min()))
+    sum_elapsed = float("{0:.2f}".format(df2['Elapsed Time'].sum()))
+    mean_seconds = float("{0:.2f}".format(df2['Elapsed Time'].mean()))
+    std_deviation = float("{0:.2f}".format(df2['Elapsed Time'].std()))
+    cnt_samples = float("{0:.2f}".format(df2['Elapsed Time'].count()))
 
     print('MAX seconds', df2['Elapsed Time'].max())
     print('MIN seconds', df2['Elapsed Time'].min())
-    print('SUM of all seconds', df2['Elapsed Time'].sum())
-    print('MEAN time of the delta Ts', df2['Elapsed Time'].mean())
-    print('STANDARD DEVIATION ', df2['Elapsed Time'].std())
+    print('SUM of all seconds', float("{0:.2f}".format(df2['Elapsed Time'].sum())))
+    print('MEAN time of the delta Ts', float("{0:.2f}".format(df2['Elapsed Time'].mean())))
+    print('STANDARD DEVIATION ', float("{0:.2f}".format(df2['Elapsed Time'].std())))
     print('COUNT of samples', df2['Elapsed Time'].count())
 
     current_time = str(datetime.now().date())
@@ -166,12 +166,12 @@ while True:
         window.FindElement('_SUMMARY_').Update(
             'MAX (seconds): {}\n'
             'MIN (seconds): {}\n'
-            'TOTAL client-seconds: {}\n'
+            'TOTAL client-seconds: {} {}\n'
             'MEAN (seconds): {}\n'
             'STANDARD DEVIATION: {}\n'
             'SAMPLE COUNT: {}'.format(max_seconds,
                                       min_seconds,
-                                      sum_elapsed,
+                                      sum_elapsed , ( "(" + str("{0:.2f}".format(sum_elapsed/3600)) + " Hours)"),
                                       mean_seconds,
                                       std_deviation,
                                       cnt_samples))
@@ -179,7 +179,7 @@ while True:
 window.Close()
 # print(values['_IP_'])
 # print(values['_PORT_'])
-print(values['_LOGSDEST'])
+print(values['_LOGSDEST_'])
 print(values['_CSVDEST_'])
 # print(values['_NUMOFPROCS_'])
 print(values['_SUMMARY_'])
